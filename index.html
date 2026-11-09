@@ -234,11 +234,10 @@ sup{line-height:0}
 .menu.open{opacity:1;visibility:visible;transition:opacity .45s var(--ease)}
 .menu-top{display:flex;justify-content:space-between;align-items:center;height:var(--bar-h);margin-top:calc(-1 * env(safe-area-inset-top,0px) + env(safe-area-inset-top,0px))}
 .menu ol{list-style:none;margin:auto 0;padding:1.5rem 0;text-align:center}
-.menu li+li{margin-top:.25rem}
+.menu li+li{margin-top:clamp(.35rem,1.2vh,.95rem)}
 .menu ol a{display:inline-block;text-decoration:none;padding:.3rem .5rem}
 .menu ol a span{display:block;font-family:var(--display);font-stretch:62.5%;font-weight:300;text-transform:uppercase;font-size:clamp(1.9rem,8.6vw,3rem);line-height:1.02;color:var(--ink);letter-spacing:.02em}
 .menu ol a small{display:block;font-family:var(--serif);font-style:italic;font-size:.98rem;color:var(--muted);line-height:1.2}
-.menu .orn{width:min(15rem,70vw);margin:0 auto}
 
 /* =====================================================================
    HERO: invitation card + countdown
@@ -454,8 +453,9 @@ textarea.input{min-height:6.5rem;resize:vertical;line-height:1.5}
 .person-h{font-family:var(--display);font-stretch:62.5%;font-weight:300;font-size:1.5rem;color:var(--ink);line-height:1.1;margin-bottom:1.2rem}
 .person-h small{display:block;font-style:italic;font-size:1rem;color:var(--muted)}
 .cond{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
-.cond>div{overflow:hidden;min-height:0}
+.cond>div{overflow:hidden;min-height:0;transition:visibility 0s .5s}
 .cond.show{grid-template-rows:1fr}
+.cond.show>div{transition:visibility 0s}
 .cond:not(.show)>div{visibility:hidden}
 .hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .form-status{font-size:.9rem;margin:0 0 1rem;text-align:center}
@@ -599,7 +599,7 @@ dialog.lightbox::backdrop{background:var(--paper)}
 .person-h,.done dt,.mc .names,.foot p{font-family:var(--serif);font-weight:500}
 .faq summary{font-family:var(--serif);font-weight:500;font-size:1.3rem}
 .venue-info h3,.map-cap h4,.travel h4,.stay-title h3,.hotel h4,.dc-rules h3,.done h3,.mc h3,.sheet-in h3,.menu ol a span{letter-spacing:.03em}
-.menu ol a small{font-family:var(--script);font-style:normal;font-size:1.3rem;line-height:1.2}
+.menu ol a small{font-family:var(--script);font-style:normal;font-size:1.3rem;line-height:1.2;margin-top:.15rem}
 .rsvp-bar a{letter-spacing:.14em;font-size:1.25rem}
 .env-card .n{font-family:var(--script);text-transform:none;letter-spacing:0;font-size:clamp(1.25rem,5.6vw,1.8rem);margin-top:.25rem}
 .env-card .d{font-family:var(--serif);font-style:normal;font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(.5rem,2.2vw,.64rem)}
@@ -842,7 +842,6 @@ dialog.lightbox::backdrop{background:var(--paper)}
     <li><a href="#rsvp" data-close><span>Répondez</span><small>RSVP</small></a></li>
     <li><a href="#bon-a-savoir" data-close><span>Bon à savoir</span><small>Good to know</small></a></li>
   </ol>
-  <svg class="orn" viewBox="-8 -8 316 96" aria-hidden="true"><use href="#e-garland"/></svg>
 </div>
 
 <main id="main" tabindex="-1">
@@ -853,8 +852,8 @@ dialog.lightbox::backdrop{background:var(--paper)}
     <svg class="mono" viewBox="0 0 1868 1822" role="img" aria-label="S and S monogram"><use href="#mono-g"/></svg>
     <h1 id="names" tabindex="-1"><span>Sera Hendrix</span><span class="and">and</span><span>Sebastian de Bruijn</span></h1>
     <div class="rule" aria-hidden="true"></div>
-    <p class="ask">request the pleasure of your company<br>at the celebration of their marriage<br>with the ceremony taking place on</p>
-    <p class="date">22 May 2027</p>
+    <p class="ask">request the pleasure of your company<br>at the celebration of their marriage from</p>
+    <p class="date">21–23 May 2027</p>
     <p class="at">at</p>
     <p class="date">Château de Vitry-la-Ville, France</p>
   </div>
@@ -896,6 +895,8 @@ dialog.lightbox::backdrop{background:var(--paper)}
           <p>We bought our first apartment together and found a place to truly call our own.</p></li>
         <li class="rv"><time datetime="2026-08-01">1 August 2026</time><h3>A thousand times yes</h3>
           <p>On top of Mount Rigi in Switzerland, Sebas asked Sera to marry him. The answer was an easy one.</p></li>
+        <li class="rv"><time datetime="2027-05-01">1 May 2027</time><h3>The civil wedding</h3>
+          <p>On 1 May 2027, we will officially tie the knot at our civil wedding. As you may have noticed, we seem to have a thing for the first of the month when it comes to special moments.</p></li>
         <li class="rv final"><time data-bind="dateEn"></time><h3>We say “I do”</h3>
           <p>And now, back where one of our first adventures began, we can’t wait to celebrate the next chapter with all of you.</p></li>
       </ol>
@@ -1204,8 +1205,8 @@ const CONFIG = {
     shortName: "Vitry-la-Ville",              // short label for the pin on the region map
     mapQuery: "Château de Vitry-la-Ville, 1 Rue de l’Église, 51240 Vitry-la-Ville, France",
     coords: { lat: 48.8455, lng: 4.4565 },
-    appleMapsUrl: "",
-    googleMapsUrl: ""
+    appleMapsUrl: "https://maps.apple/p/E73Q0hSLvgZzAM",
+    googleMapsUrl: "https://maps.app.goo.gl/sURXB5vZoRdk2KNR7?g_st=ic"
   },
 
   /* ---------- LE DOMAINE: PLAN OF THE CHÂTEAU GROUNDS ----------------
@@ -1220,10 +1221,10 @@ const CONFIG = {
     imageAlt: "",
     note: "Schematic plan of the estate. Not to scale.",
     areas: [
-      { id: "cour",    name: "Cour d’honneur", en: "Main courtyard", x: 50, y: 63, desc: "Where you arrive, between the two gate pavilions." },
+      { id: "cour",    name: "Cour d’honneur", en: "Main courtyard", x: 50, y: 63, desc: "Where you arrive, between the two gate pavilions, and where dinner and cake are served." },
       { id: "salon1",  name: "Le château — salon I", en: "First room, right wing", x: 66.1, y: 49.29, desc: "The ceremony takes place here, inside the château." },
       { id: "salon2",  name: "Le château — salon II", en: "Second room, right wing", x: 78.3, y: 49.29, desc: "The first dance and the party." },
-      { id: "jardin",  name: "Le jardin", en: "The garden", x: 50, y: 28, desc: "The French garden behind the château: dinner, cake and Sunday brunch." },
+      { id: "jardin",  name: "Le jardin", en: "The garden", x: 50, y: 28, desc: "The French garden behind the château: the vin d’honneur and Sunday brunch." },
       { id: "piscine", name: "La piscine", en: "The pool", x: 16, y: 49, desc: "Beside the garage, on the left of the château." },
       { id: "parking", name: "Parking", en: "Car park", x: 84, y: 92, desc: "Parking is on the right of the estate, a short walk from the courtyard." },
       { id: "eglise",  name: "L’église", en: "Village church", x: 19.2, y: 93, desc: "The village church of Vitry-la-Ville, next to the estate." }
@@ -1254,7 +1255,9 @@ const CONFIG = {
       note: "",
       bookingUrl: "https://www.loisium.com/fr/champagne/",
       mapQuery: "LOISIUM Wine & Spa Hotel Champagne, 1 Allée de la Sapinière, 51160 Mutigny, France",
-      coords: { lat: 49.0733, lng: 3.9967 }
+      coords: { lat: 49.0733, lng: 3.9967 },
+      appleMapsUrl: "https://maps.apple/p/~aT3aMFhCGmC5v",
+      googleMapsUrl: "https://maps.app.goo.gl/GckRge1GchjUMXdm6?g_st=ic"
     }
   ],
 
@@ -1281,8 +1284,8 @@ const CONFIG = {
           linkTo: "#nos-adresses", linkText: "Our recommendations" },
         { time: "14:30", title: "Arrivée & bienvenue", area: "cour", en: "Arrival at the Château", desc: "", where: "" },
         { time: "15:00", title: "Cérémonie", area: "salon1", en: "Ceremony", desc: "", where: "", end: "16:00", countdown: true },
-        { time: "16:00", title: "Vin d’honneur", area: "cour", en: "Reception", desc: "", where: "", end: "18:00" },
-        { time: "18:00", title: "Dîner", area: "jardin", en: "Dinner", desc: "", where: "" },
+        { time: "16:00", title: "Vin d’honneur", area: "jardin", en: "Reception", desc: "", where: "", end: "18:00" },
+        { time: "18:00", title: "Dîner", area: "cour", en: "Dinner", desc: "", where: "" },
         { time: "21:30", title: "Première danse & soirée dansante", area: "salon2", en: "First dance & party", desc: "", where: "", end: "02:00" }
       ]
     },
@@ -1301,10 +1304,10 @@ const CONFIG = {
     // `image` is optional: only Saturday has one. To update it, replace
     // images/dress-code-collage.jpg with a new file of the same name.
     days: [
-      { id: "fri", tab: "Vendredi", en: "Friday", name: "Garden party", sub: "", faqSub: "Resort chic",
+      { id: "fri", tab: "Vendredi", en: "Friday", name: "Garden party", sub: "Cocktail Attire", faqSub: "Resort chic",
         rules: [
-          { who: "Mesdames", text: "Elegant summer dresses or sophisticated separates." },
-          { who: "Messieurs", text: "Light tailoring, linen suits or smart summer ensembles." }
+          { who: "Mesdames", text: "Elegant summer dresses, matching sets or jumpsuits." },
+          { who: "Messieurs", text: "Light tailoring or linen suits." }
         ], image: "", imageAlt: "" },
       { id: "sat", tab: "Samedi", en: "Saturday", name: "Colourful black tie", sub: "",
         rules: [
@@ -1315,7 +1318,7 @@ const CONFIG = {
         imageAlt: "Colourful black tie inspiration: guests in long formal gowns in vibrant solid colours — pink, orange, cobalt, lime, plum — and men in classic black tuxedos." },
       { id: "sun", tab: "Dimanche", en: "Sunday", name: "Brunch & pool party", sub: "", faqSub: "Resort casual",
         rules: [
-          { who: "Tout le monde", text: "Relaxed summer attire. Swimwear and cover-ups are welcome." }
+          { who: "Tout le monde", text: "Relaxed summer attire. Swimwear is welcome." }
         ], image: "", imageAlt: "" }
     ],
     notes: "",
@@ -1361,8 +1364,7 @@ const CONFIG = {
         { name: "Le Bellevue, Royal Champagne Hotel & Spa", address: "9 Rue de la République, 51160 Champillon", place: "Champillon", note: "", lat: 49.0637, lng: 3.9739 },
         { name: "Château de Sacy", address: "Rue des Croisettes, 51500 Sacy", place: "Sacy", note: "", lat: 49.2011, lng: 3.9686 },
         { name: "Brasserie Le Jardin", address: "7 Avenue du Général Giraud, 51100 Reims", place: "Reims", note: "", lat: 49.2452, lng: 4.0512 },
-        { name: "Brasserie Le Boulingrin", address: "31 Rue de Mars, 51100 Reims", place: "Reims", note: "", lat: 49.2578, lng: 4.0294 },
-        { name: "Perching Bar", address: "Forêt de Brise Charrette, 51380 Verzy", place: "Verzy", note: "", lat: 49.1530, lng: 4.1550 }
+        { name: "Brasserie Le Boulingrin", address: "31 Rue de Mars, 51100 Reims", place: "Reims", note: "", lat: 49.2578, lng: 4.0294 }
       ]
     },
     {
@@ -1940,7 +1942,7 @@ const CONFIG = {
     }
     // "what should I wear?": a short summary per day; the full descriptions stay in Le dress code
     const faq = $("#faq-dress");
-    const faqDay = { fri: "Friday — Garden Party", sat: "Saturday — Colorful Black Tie", sun: "Sunday — Brunch & Pool Party" };
+    const faqDay = { fri: "Friday — Garden Party, Cocktail Attire", sat: "Saturday — Colorful Black Tie", sun: "Sunday — Brunch & Pool Party" };
     if (faq) faq.innerHTML = days.map(d => "<p><strong>" + esc(faqDay[d.id] || d.en + " — " + d.name) + "</strong></p>").join("") +
       '<p>For further details, please see the <a href="#dress-code">Dress Code</a> section above, including our photo inspiration for Saturday\u2019s Colorful Black Tie celebration.</p>' +
       "<p>A little note on footwear: As much of the château grounds is gravel or grass, a block or wider heel may be more comfortable than a fine stiletto.</p>";
